@@ -3,19 +3,26 @@
 {% block content %}
 <head><title>Все записи</title></head>
 
+{% if not page_obj%}
+  <h2>Пока записей нет :(</h2>
+{% endif%}
 
-  <!--All posts with information from db-->
-  {% for p in page_obj%}
-    <h3>{{p.title}}</h3>
-    <p>{{p.body|linebreaks|truncatewords:100}}</p>
-    <br>
-    <p>{{p.created}}</p>
-    <a href="{%url 'post_detail' p.slug %}">Подробнее</a>
-  {%endfor%}
-  {% for contact in page_obj %}
-<p>{{ contact }}</p>
+<!--All posts with information from db-->
+{% for p in page_obj%}
+<br>
+<div class="card">
+  <div class="card-header">
+    От {{ p.author }}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{p.title}}</h5>
+    <p class="card-text">{{p.body|linebreaks|truncatewords:90}}</p>
+    <a href="{%url 'post_detail' p.slug %}" class="btn btn-primary">Подробнее</a>
+  </div>
+</div>
 {% endfor %}
 
+  <br>
 
 {% if page_obj %}
 <!--Pagination-->
