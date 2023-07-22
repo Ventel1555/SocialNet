@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head><title>Все записи</title></head>
+
+
+  <!--All posts with information from db-->
+  {% for p in page_obj%}
+    <h3>{{p.title}}</h3>
+    <p>{{p.body|linebreaks|truncatewords:100}}</p>
+    <br>
+    <p>{{p.created}}</p>
+    <a href="{%url 'post_detail' p.slug %}">Подробнее</a>
+  {%endfor%}
+  {% for contact in page_obj %}
+<p>{{ contact }}</p>
+{% endfor %}
+
+
+{% if page_obj %}
+<!--Pagination-->
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    {% if page_obj.has_previous %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+    </li>
+    {% endif %}
+  {% for p in page_obj.paginator.page_range %}
+    {% if page_obj.number == p %}
+      <li class="page-item active"><a class="page-link" href="#">{{ p }}</a></li>
+    {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2  %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ p }}">{{ p }}</a>
+      </li>
+    {% endif %}
+  {% endfor %}
+  {% if page_obj.has_next %}
+    <li class="page-item">
+     <a class="page-link" href="?page={{ page_obj.next_page_number }}">&gt;</a>
+    </li>
+  {% endif %}
+  </ul>
+</nav>
+{%endif%}
+ </body>
+{%endblock%}

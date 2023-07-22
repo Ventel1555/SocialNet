@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<head><title>{{post.title}}</title></head>
+ <body>
+  <h2>{{post.title}}</h2>
+  <br>Auther:
+  {{post.author}}
+  <br>Text:
+  <p>{{post.body|linebreaks}}</p>
+  <br>Created:
+  {{post.created}}
+  <br>Update:
+  {{post.updated}}
+
+<!--Count of total comments-->
+  {% with comments.count as total_comments %}
+    <h2>
+        Всего {{ total_comments }} comment{{ total_comments|pluralize }}
+    </h2>
+{% endwith %}
+
+{% for comment in comments %}
+    <div class="comment">
+        <h4 class="info">
+            {{ forloop.counter }} коментарий от {{ comment.name }} в
+            {{ comment.created }}
+        </h4>
+        <p>{{ comment.body|linebreaks }}</p>
+    </div>
+{% empty %}
+    <p>There are no comments yet.</p>
+{% endfor %}
+    <h2>Add a new comment</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <input type="submit" value="Add comment">
+    </form>
+ </body>
+ 
+ {% endblock %}
