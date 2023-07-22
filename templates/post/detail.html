@@ -2,7 +2,6 @@
 
 {% block content %}
 <head><title>{{post.title}}</title></head>
- <body>
   <h2>{{post.title}}</h2>
   <br>Автор:
   {{post.author}}
@@ -14,8 +13,15 @@
   <br>Последнее изменение:
   {{post.updated}}
   {% endif %}
+  {% if user == post.author %}
+    <br>
+    <br>
+    <a class="btn btn-warning" href="{% url 'post_edit' slug=post.slug %}">Изменить</a>
+    <br>
+  {% endif %}
 
 <!--Count of total comments-->
+{% if post.status == 'published' %}
   {% with comments.count as total_comments %}
     <h2>
         Всего {{ total_comments }} comment{{ total_comments|pluralize }}
@@ -39,6 +45,11 @@
         {{ comment_form.as_p }}
         <input type="submit" class="btn btn-success" value="Добавить коментарий">
     </form>
- </body>
- 
+{%else%}
+    <br>
+    <div class="alert alert-primary" role="alert">
+      Запись в черновике. Если хотите, чтобы другие пользователи тоже могли видеть и комментировать запись,
+      измените значение Draft на Published <a href="{% url 'post_edit' post.slug %}" class="alert-link">в редактировании записи</a>.
+    </div>
+{%endif%}
  {% endblock %}

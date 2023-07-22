@@ -16,7 +16,7 @@
   </div>
   <div class="card-body">
     <h5 class="card-title">{{p.title}}</h5>
-    <p class="card-text">{{p.body|linebreaks|truncatewords:90}}</p>
+    <p class="card-text">{{p.body|linebreaks|truncatewords:100}}</p>
     <a href="{%url 'post_detail' p.slug %}" class="btn btn-primary">Подробнее</a>
   </div>
 </div>
