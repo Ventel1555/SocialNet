@@ -14,7 +14,7 @@
     {% endif %}
     <span class="user">
         {% if request.user.is_authenticated %}
-            Hello {{ request.user }},
+            Hello {{ request.user.first_name }},
             <a class="navbar-brand" href="{% url 'logout' %}">Logout</a>
         {% else %}
             <a class="navbar-brand" href="{% url 'login' %}">Log-in</a>

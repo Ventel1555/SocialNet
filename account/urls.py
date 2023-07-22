@@ -10,4 +10,5 @@ from django.contrib.auth.views import logout_then_login
 urlpatterns = [
     # login / logout urls
     path('', views.dashboard, name='dashboard'),
+    path('register/', views.register, name='register'),
 ]
