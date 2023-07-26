@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-<head><title>Изменение поста</title></head>
-<h1>Новый пост</h1>
+<head><title>Редактирование поста</title></head>
+<h1>Редактирование поста | Создание поста</h1>
     <form method="POST" class="post-form">
         {% csrf_token %}
         {{ form.as_p }}

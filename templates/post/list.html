@@ -9,7 +9,6 @@
 
 <!--All posts with information from db-->
 {% for p in page_obj%}
-<br>
 <div class="card">
   <div class="card-header">
     От {{ p.author }}
@@ -20,10 +19,10 @@
     <a href="{%url 'post_detail' p.slug %}" class="btn btn-primary">Подробнее</a>
   </div>
 </div>
+<br>
 {% endfor %}
 
-  <br>
-
+<!--Pagination-->
 {% if page_obj %}
 <!--Pagination-->
 <nav aria-label="Page navigation example">

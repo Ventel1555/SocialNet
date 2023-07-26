@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
+from django.urls import reverse_lazy
 from .models import Post
+from django.views.generic.edit import DeleteView
 from django.utils.text import slugify
 from .forms import CommentForm, PostForm
 from django.contrib.auth.decorators import login_required 
@@ -64,3 +66,8 @@ def post_edit(request, slug):
     else:
         form = PostForm(instance=post)
     return render(request, 'post/post_edit.html', {'form': form})
+
+class BlogDeleteView(DeleteView):
+    model = Post
+    template_name = 'post/post_delete.html'
+    success_url = reverse_lazy('dashboard')

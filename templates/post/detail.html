@@ -1,26 +1,30 @@
 {% extends "base.html" %}
 
+<!--ВЫВОД СТАТЕЙ | ALL POSTS-->
 {% block content %}
 <head><title>{{post.title}}</title></head>
   <h2>{{post.title}}</h2>
-  <br>Автор:
-  {{post.author}}
-  <br>
-  <p>{{post.body|linebreaks}}</p>
-  <br>Создана:
-  {{post.created}}
+  <p>Автор: {{post.author}}</p>
+  <p>Текст: {{post.body|linebreaks}}</p>
+  <p>Создана: {{post.created}}</p>
   {% if post.created != post.updated%}
-  <br>Последнее изменение:
-  {{post.updated}}
+  <p>Последнее изменение: {{post.updated}}</p>
   {% endif %}
+  
   {% if user == post.author %}
-    <br>
-    <br>
-    <a class="btn btn-warning" href="{% url 'post_edit' slug=post.slug %}">Изменить</a>
-    <br>
+    <p><a class="btn btn-warning" href="{% url 'post_edit' slug=post.slug %}" role="button">Изменить</a></p>
+    <div class="dropdown">
+        <button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Удалить
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="{% url 'post_delete' post.slug %}">Подтвердить удаление</a></li>
+        </ul>
+      </div>
   {% endif %}
 
-<!--Count of total comments-->
+
+<!--Alert adout Draft setting and output of all comments-->
 {% if post.status == 'published' %}
   {% with comments.count as total_comments %}
     <h2>
