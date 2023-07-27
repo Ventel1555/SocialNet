@@ -1,7 +1,8 @@
 {% extends "base.html" %}
+<!--Detail view | Детальный просмотр статей-->
 
-<!--ВЫВОД СТАТЕЙ | ALL POSTS-->
 {% block content %}
+<!--ВЫВОД СТАТЕЙ | ALL POSTS-->
 <head><title>{{post.title}}</title></head>
   <h2>{{post.title}}</h2>
   <p>Автор: {{post.author}}</p>
@@ -10,7 +11,10 @@
   {% if post.created != post.updated%}
   <p>Последнее изменение: {{post.updated}}</p>
   {% endif %}
-  
+
+
+  <!--Если пользователь автор, может редактировать или удалить пост |
+      If the user is an author, he can edit or delete the post-->
   {% if user == post.author %}
     <p><a class="btn btn-warning" href="{% url 'post_edit' slug=post.slug %}" role="button">Изменить</a></p>
     <div class="dropdown">
@@ -24,7 +28,7 @@
   {% endif %}
 
 
-<!--Alert adout Draft setting and output of all comments-->
+<!--Вывод количества комментариев | Displaying the number of comments-->
 {% if post.status == 'published' %}
   {% with comments.count as total_comments %}
     <h2>
@@ -32,6 +36,9 @@
     </h2>
 {% endwith %}
 
+
+<!--Вывод формы для комментариев или предупрежжение, что пост находиться в черновике |
+    Displaying a comment form or warning that a post is in the "Draft" status -->
 {% for comment in comments %}
     <div class="comment">
         <h4 class="info">
@@ -41,7 +48,7 @@
         <p>{{ comment.body|linebreaks }}</p>
     </div>
 {% empty %}
-    <p>Пока тут нет комементариев.</p>
+    <p>Никто не добавил комментариев.</p>
 {% endfor %}
     <h2>Добавить комментарий</h2>
     <form action="" method="post">

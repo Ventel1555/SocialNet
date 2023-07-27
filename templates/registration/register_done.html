@@ -4,6 +4,6 @@
 {% block content %}
 <head><title>Добро пожаловать!</title></head>
 
-    <h1>Welcome {{ new_user.first_name }}!</h1>
-    <p>Your account has been successfully created. Now you can <a href="{% url "login" %}">log in</a>.</p>
+    <h1>Добро пожаловать, {{ new_user.first_name }}!</h1>
+    <p>Ваш аккаунт успешно создан. Тепер вы можете <a href="{% url 'login' %}">войти</a> и просматривать контент.</p>
 {% endblock %}

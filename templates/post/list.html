@@ -7,7 +7,8 @@
   <h2>Пока записей нет :(</h2>
 {% endif%}
 
-<!--All posts with information from db-->
+
+<!--Все посты с информацией из бд | All posts with information from db-->
 {% for p in page_obj%}
 <div class="card">
   <div class="card-header">
@@ -24,7 +25,6 @@
 
 <!--Pagination-->
 {% if page_obj %}
-<!--Pagination-->
 <nav aria-label="Page navigation example">
   <ul class="pagination justify-content-center">
     {% if page_obj.has_previous %}

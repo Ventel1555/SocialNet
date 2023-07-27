@@ -7,16 +7,15 @@
 </head>
 <body>  
 
-<div class="container">
-<nav class="navbar bg-body-tertiary">
+    <!--Навигационная панель | Nav bar-->
+<div class="container" style="padding-bottom: 30px;">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-md">
     <a class="navbar-brand" href="{% url 'post_list'%}">Все записи</a>
     <a href="{% url 'post_new' %}" class="navbar-brand">Создать запись</a>
     {% if request.user.is_authenticated %}
     <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Профиль
-        </button>
+        <a class="navbar-brand dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" href="{% url 'post_list'%}">Профиль</a>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="{% url 'dashboard' %}">Редактирование записей</a></li>
           <li><a class="dropdown-item" href="{% url 'edit' %}">Изменение профиля</a></li>
@@ -26,9 +25,9 @@
     <span class="user">
         {% if request.user.is_authenticated %}
             Hello {{ request.user.first_name }},
-            <a class="navbar-brand" href="{% url 'logout' %}">Logout</a>
+            <a class="navbar-brand" href="{% url 'logout' %}">Выйти</a>
         {% else %}
-            <a class="navbar-brand" href="{% url 'login' %}">Log-in</a>
+            <a class="navbar-brand" href="{% url 'login' %}">Войти</a>
         {% endif %}
     </span>
   </div>
@@ -36,15 +35,15 @@
 </div>
 
 
+    <!--Announcement | Объявление-->
     {% if messages %}
-    <ul class="messages">
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Внимание!</strong>
         {% for message in messages %}
-            <li class="{{ message.tags }}">
-                {{ message|safe }}
-                <a href="#" class="close">✖</a>
-            </li>
+            {{ message|safe }}.
         {% endfor %}
-    </ul>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>  
     {% endif %}
     {% block content %}
     {% endblock %}
