@@ -6,12 +6,20 @@ How to start project?
 py -m venv .venv
 .\.venv\Scripts\activate
 pip install -r requirements.txt
+py manage.py makemigrations blog
+py manage.py migrate blog
 py manage.py makemigrations
 py manage.py migrate
 py manage.py runserver
 ```
+If you get error, try this:
+```
+python manage.py migrate --run-syncdb 
+```
 
 Done!:white_check_mark: Go to browser using the link from the console.
+
+Remember to set you secret key in settings.
 ____
 **About the project**:
   A project, such as a social network, in which you can create, change, delete a user.
