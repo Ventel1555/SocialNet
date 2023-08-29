@@ -3,20 +3,25 @@ How to start project?
     Write the following lines in the consol:
 
 ```
-py -m venv .venv
+python -m venv .venv
 .\.venv\Scripts\activate
 pip install -r requirements.txt
-py manage.py makemigrations blog
-py manage.py migrate blog
-py manage.py makemigrations
-py manage.py migrate
-py manage.py runserver
+python manage.py makemigrations blog
+python manage.py migrate blog
+python manage.py makemigrations
+python manage.py migrate
 ```
 If you get error, try this:
 ```
 python manage.py migrate --run-syncdb 
 ```
+To make the password reset work, in the ```SocialNetwork/settings.py``` , change the values in the last lines (EMAIL_HOST_USER, EMAIL_HOST_PASSWORD). More details on how to set your password here:
+https://support.google.com/accounts/answer/185833?visit_id=638289412602448566-3451469924&p=InvalidSecondFactor&rd=1
 
+Run server:
+```
+python manage.py runserver
+```
 Done!:white_check_mark: Go to browser using the link from the console.
 
 Remember to set you secret key in settings.
@@ -37,3 +42,5 @@ And I’ll add, when you reset your password, a unique link is sent to the conso
 
 И ещё добавлю, при сбросе пароля уникальная ссылка отправляется в консоль.
 
+
+Чтобы работал сброс пароля, в фале ```SocialNetwork/settings.py``` , измените значения в последних строчках (EMAIL_HOST_USER, EMAIL_HOST_PASSWORD). Подробнее, как поставить свой пароль здесь: https://support.google.com/accounts/answer/185833?visit_id=638289412602448566-3451469924&p=InvalidSecondFactor&rd=1 
