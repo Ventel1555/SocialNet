@@ -16,7 +16,7 @@ If you get error, try this:
 python manage.py migrate --run-syncdb 
 ```
 To make the password reset work, in the ```SocialNetwork/settings.py``` , change the values in the last lines (EMAIL_HOST_USER, EMAIL_HOST_PASSWORD). More details on how to set your password here:
-https://support.google.com/accounts/answer/185833?visit_id=638289412602448566-3451469924&p=InvalidSecondFactor&rd=1
+https://support.google.com/accounts/answer/185833?&p=InvalidSecondFactor&rd=1
 
 Run server:
 ```
@@ -43,4 +43,4 @@ And I’ll add, when you reset your password, a unique link is sent to the conso
 И ещё добавлю, при сбросе пароля уникальная ссылка отправляется в консоль.
 
 
-Чтобы работал сброс пароля, в фале ```SocialNetwork/settings.py``` , измените значения в последних строчках (EMAIL_HOST_USER, EMAIL_HOST_PASSWORD). Подробнее, как поставить свой пароль здесь: https://support.google.com/accounts/answer/185833?visit_id=638289412602448566-3451469924&p=InvalidSecondFactor&rd=1 
+Чтобы работал сброс пароля, в фале ```SocialNetwork/settings.py``` , измените значения в последних строчках (EMAIL_HOST_USER, EMAIL_HOST_PASSWORD). Подробнее, как поставить свой пароль здесь: https://support.google.com/accounts/answer/185833?&p=InvalidSecondFactor&rd=1
