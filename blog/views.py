@@ -67,7 +67,9 @@ def post_edit(request, slug):
         form = PostForm(instance=post)
     return render(request, 'post/post_edit.html', {'form': form})
 
+
 class BlogDeleteView(DeleteView):
+    login_required = True
     model = Post
     template_name = 'post/post_delete.html'
     success_url = reverse_lazy('dashboard')

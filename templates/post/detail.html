@@ -32,7 +32,7 @@
 {% if post.status == 'published' %}
   {% with comments.count as total_comments %}
     <h2>
-        Всего {{ total_comments }} comment{{ total_comments|pluralize }}
+        Всего {{ total_comments }} коммент{{ total_comments|pluralize:'а'}}
     </h2>
 {% endwith %}
 
@@ -50,12 +50,23 @@
 {% empty %}
     <p>Никто не добавил комментариев.</p>
 {% endfor %}
-    <h2>Добавить комментарий</h2>
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ comment_form.as_p }}
-        <input type="submit" class="btn btn-success" value="Добавить коментарий">
-    </form>
+<h2>Добавить комментарий</h2>
+<form action="" method="post">
+    {% csrf_token %}
+    {% for com in comment_form%}
+    <div class="form-label">
+      {{com}}
+    </div>
+    {% if field.errors%}
+      {% for error in field.errors %}
+      <div class="alert alert-danger">
+          {{error}}
+      </div>
+      {% endfor %}
+    {% endif %}
+    {% endfor %}
+    <input type="submit" class="btn btn-success" value="Добавить коментарий">
+</form>
 {%else%}
     <br>
     <div class="alert alert-primary" role="alert">
