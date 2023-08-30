@@ -5,7 +5,7 @@
 <head><title>Редактирование записей</title></head>
 
     <h1>Профиль, редактирование записей.</h1>
-    <p>Приветствуюем вас, здесь вы можете отсмотреть ваши записа, редактировать их.</p>
+    <p>Приветствуюем вас, здесь вы можете отсмотреть ваши записи, редактировать их.</p>
 
 
 <!--Отображение всех созданных личных записей | Displaying all created personal posts-->
@@ -13,7 +13,7 @@
 <br>
 <div class="card">
   <div class="card-header">
-    От {{ p.author }}
+    От <b><a href="{%url 'blogers' p.author.id %}">{{p.author}}</a></b> в <b>{{p.created}}</b>
   </div>
   <div class="card-body">
     <h5 class="card-title">{{p.title}}</h5>
@@ -29,5 +29,35 @@
     </div>
     {% endif %}
 </div>
+  {% empty %}
+  <p>У вас нет запесей</p>
 {% endfor %}
+<br>
+<!--Pagination-->
+{% if page_obj %}
+<br>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    {% if page_obj.has_previous %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+    </li>
+    {% endif %}
+  {% for p in page_obj.paginator.page_range %}
+    {% if page_obj.number == p %}
+      <li class="page-item active"><a class="page-link" href="#">{{ p }}</a></li>
+    {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2  %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ p }}">{{ p }}</a>
+      </li>
+    {% endif %}
+  {% endfor %}
+  {% if page_obj.has_next %}
+    <li class="page-item">
+     <a class="page-link" href="?page={{ page_obj.next_page_number }}">&gt;</a>
+    </li>
+  {% endif %}
+  </ul>
+</nav>
+{%endif%}
 {% endblock %}

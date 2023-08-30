@@ -7,7 +7,7 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ("status", "created", "author")
     search_fields = ("title", "body")
     prepopulated_fields = {"slug": ("title",)}
-    raw_id_fields = ("author",)
+    raw_id_fields = ("author",) 
     date_hierarchy = "created"
     ordering = ["status", "created"]
 
@@ -16,6 +16,8 @@ class CommentAdmin(admin.ModelAdmin):
     list_display = ("name", "post", "created", "active")
     list_filter = ("active", "created", "updated")
     search_fields = ("name", "body")
+    actions = ["active"]
+    
 
 
 admin.site.register(Comment, CommentAdmin)

@@ -4,17 +4,27 @@ from blog.models import Post
 from django.contrib import messages
 from .forms import UserEditForm, UserRegistrationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 
 @login_required
 # list of all your own posts
-def dashboard(request):
-    posts = Post.objects.filter(author=request.user)
+def dashboard(request, nickid=None):
+    if nickid == None:
+        posts = Post.objects.filter(author=request.user)
 
-    paginator = Paginator(posts, 5)
-    page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
-    return render(request, "dashboard.html", {"page_obj": page_obj})
+        paginator = Paginator(posts, 5)
+        page_number = request.GET.get("page")
+        page_obj = paginator.get_page(page_number)
+        return render(request, "dashboard.html", {"page_obj": page_obj})
+    else:
+        usernick = User.objects.get(id=nickid)
+        posts = Post.objects.filter(author=usernick, status="published")
+        
+        paginator = Paginator(posts, 5)
+        page_number = request.GET.get("page")
+        page_obj = paginator.get_page(page_number)
+        return render(request, "post/blogers.html", {"page_obj": page_obj, "usernick": usernick})
 
 
 def register(request):

@@ -1,30 +1,32 @@
 {% extends "base.html" %}
 
+
 {% block content %}
-<head><title>Все записи</title></head>
+<head><title>Профиль {{usernick}}</title></head>
 
-{% if not page_obj%}
-  <h2>Пока записей нет :(</h2>
-{% endif%}
+    <h1>Профиль {{usernick}}</h1>
 
-
-<!--Все посты с информацией из бд | All posts with information from db-->
+<!--Отображение всех созданных личных записей | Displaying all created personal posts-->
 {% for p in page_obj%}
+<br>
 <div class="card">
   <div class="card-header">
     От <b><a href="{%url 'blogers' p.author.id %}">{{p.author}}</a></b> в <b>{{p.created}}</b>
   </div>
   <div class="card-body">
     <h5 class="card-title">{{p.title}}</h5>
-    <p class="card-text">{{p.body|linebreaks|truncatewords:100}}</p>
+    <p class="card-text">{{p.body|linebreaks|truncatewords:90}}</p>
     <a href="{%url 'post_detail' p.slug %}" class="btn btn-primary">Подробнее</a>
   </div>
 </div>
-<br>
+{% empty %}
+<p>У вас нет запесей</p>
 {% endfor %}
+
 
 <!--Pagination-->
 {% if page_obj %}
+<br>
 <nav aria-label="Page navigation example">
   <ul class="pagination justify-content-center">
     {% if page_obj.has_previous %}
@@ -49,5 +51,4 @@
   </ul>
 </nav>
 {%endif%}
- </body>
-{%endblock%}
+{% endblock %}
