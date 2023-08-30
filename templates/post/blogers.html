@@ -5,7 +5,16 @@
 <head><title>Профиль {{usernick}}</title></head>
 
     <h1>Профиль {{usernick}}</h1>
-
+    <p>Информация о пользователе</p>
+    <h3>Био:</h3>
+    <p>Имя - {{usernick.first_name|default:"не известно"}}</p>
+    <p>Фамилия - {{usernick.last_name|default:"не известно"}}</p>
+    <p>Зарегестрировался - {{usernick.date_joined}}</p>
+    {% if usernick.is_staff %}
+      <b>Является админом</b>
+      <br>
+    {% endif %}
+    
 <!--Отображение всех созданных личных записей | Displaying all created personal posts-->
 {% for p in page_obj%}
 <br>
