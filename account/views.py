@@ -1,10 +1,20 @@
 from django.shortcuts import render
+
 from django.core.paginator import Paginator
-from blog.models import Post
+
 from django.contrib import messages
-from .forms import UserEditForm, UserRegistrationForm
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+
+from django.urls import reverse
+
+from django.http import HttpResponseRedirect
+
+from blog.models import Post
+
+from account.models import User
+
+from .forms import UserEditForm, UserRegistrationForm
 
 
 @login_required
@@ -18,7 +28,7 @@ def dashboard(request, nickid=None):
         page_obj = paginator.get_page(page_number)
         return render(request, "dashboard.html", {"page_obj": page_obj})
     else:
-        usernick = User.objects.get(id=nickid)
+        usernick = get_user_model().objects.get(id=nickid)
         posts = Post.objects.filter(author=usernick, status="published")
         
         paginator = Paginator(posts, 5)
@@ -59,3 +69,18 @@ def edit(request):
     else:
         user_form = UserEditForm(instance=request.user)
         return render(request, "account/edit.html", {"user_form": user_form})
+
+
+@login_required
+def followToggle(request, author_id):
+    authorObj = User.objects.get(id=author_id)
+    currentUserObj = User.objects.get(id=request.user.id)
+    following = authorObj.following.all()
+
+    if author_id != currentUserObj.id:
+        if currentUserObj in following:
+            authorObj.following.remove(currentUserObj.id)
+        else:
+            authorObj.following.add(currentUserObj.id)
+
+    return HttpResponseRedirect(reverse(dashboard, args=[authorObj.id]))

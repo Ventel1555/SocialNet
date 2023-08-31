@@ -5,7 +5,7 @@
 <!--ВЫВОД СТАТЕЙ | ALL POSTS-->
 <head><title>{{post.title}}</title></head>
   <h2>{{post.title}}</h2>
-  <p>Автор: {{post.author}}</p>
+  <p>Автор: <a href="{%url 'blogers' post.author.id %}">{{post.author}}</a></p>
   <p>Текст: {{post.body|linebreaks}}</p>
   <p>Создана: {{post.created}}</p>
   {% if post.created != post.updated%}

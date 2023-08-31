@@ -7,8 +7,7 @@ python -m venv .venv
 .\.venv\Scripts\activate
 pip install -r requirements.txt
 python manage.py makemigrations blog
-python manage.py migrate blog
-python manage.py makemigrations
+python manage.py makemigrations account
 python manage.py migrate
 ```
 If you get error, try this:
