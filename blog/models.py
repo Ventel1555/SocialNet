@@ -7,17 +7,17 @@ class Post(models.Model):
         ("draft", "Draft"),
         ("published", "Published"),
     )
-    title = models.CharField(max_length=250)
+    title = models.CharField(max_length=250, verbose_name='Загаловок')
     slug = models.SlugField(
         max_length=250, unique_for_date="created", unique=True, verbose_name="URL"
     )
     author = models.ForeignKey(
         User, related_name="blog_posts", on_delete=models.CASCADE
     )
-    body = models.TextField()
+    body = models.TextField(verbose_name='Текст')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="draft")
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="draft", verbose_name='Загаловок')
 
     class Meta:
         ordering = ("-created",)

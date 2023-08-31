@@ -24,7 +24,6 @@ def post_new(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
-            post.slug = slugify(post.title)
             post.save()
             return redirect("post_list")
     else:
