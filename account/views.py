@@ -17,10 +17,9 @@ from account.models import User
 from .forms import UserEditForm, UserRegistrationForm
 
 
-@login_required
 # list of all your own posts
 def dashboard(request, nickid=None):
-    if nickid == None:
+    if nickid == None and request.is_authenticated:
         posts = Post.objects.filter(author=request.user)
 
         paginator = Paginator(posts, 5)
