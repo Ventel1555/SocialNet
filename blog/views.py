@@ -8,6 +8,8 @@ from django.views.generic.edit import DeleteView
 
 from django.contrib.auth.decorators import login_required
 
+from blog.utils import AuthenticatedMixin
+
 from .models import Post
 
 from .forms import CommentForm, PostForm
@@ -84,7 +86,7 @@ def post_edit(request, slug):
     return render(request, "post/post_edit.html", {"form": form})
 
 
-class BlogDeleteView(DeleteView):
+class BlogDeleteView(AuthenticatedMixin, DeleteView):
     login_required = True
     model = Post
     template_name = "post/post_delete.html"
