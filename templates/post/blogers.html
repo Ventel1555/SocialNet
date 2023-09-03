@@ -14,15 +14,14 @@
       <b>Является админом</b>
       <br>
     {% endif %}
-
+  
 
     <!--Folowing system | -->
     <div class="mt-3">
-      <h4>{{ usernick.username }}</h4>
+      <h4>Статистика {{ usernick.username }}:</h4>
       <div class="row">
         <b> Подписок : </b>
         <p class="text-muted"> {{ usernick.following.count }} </p>
-        &nbsp;&nbsp;&nbsp;&nbsp;
         <b> Подписчиков : </b>
         <p class="text-muted"> {{ usernick.followers.count }} </p>
       </div>
@@ -39,6 +38,8 @@
     </div>
 
 <!--Отображение всех созданных личных записей | Displaying all created personal posts-->
+<br>
+<h3>Записи {{usernick.username}}:</h3>
 {% for p in page_obj%}
 <br>
 <div class="card">
@@ -52,7 +53,7 @@
   </div>
 </div>
 {% empty %}
-<p>У вас нет запесей</p>
+<p>Пока что тут пусто(</p>
 {% endfor %}
 
 

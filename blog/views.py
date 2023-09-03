@@ -18,7 +18,7 @@ from .forms import CommentForm, PostForm
 # List of all posts
 def post_list(request):
     posts = Post.objects.filter(status="published")
-
+    
     paginator = Paginator(posts, 5)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)

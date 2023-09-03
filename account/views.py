@@ -13,7 +13,7 @@ from django.http import HttpResponseRedirect
 from blog.models import Post
 
 from account.models import User
-
+LOGIN_REDIRECT_URL = 'home'
 from .forms import UserEditForm, UserRegistrationForm
 
 
@@ -60,10 +60,10 @@ def edit(request):
         user_form = UserEditForm(instance=request.user, data=request.POST)
         if user_form.is_valid():
             user_form.save()
-            messages.success(request, "Profile updated successfully")
+            messages.success(request, "Профиль успешно обновлён")
             return render(request, "account/edit.html", {"user_form": user_form})
         else:
-            messages.error(request, "Error updating your profile")
+            messages.error(request, "Ошибка в изменении, попробуйте снова")
             return render(request, "account/edit.html", {"user_form": user_form})
     else:
         user_form = UserEditForm(instance=request.user)
@@ -83,3 +83,6 @@ def followToggle(request, author_id):
             authorObj.following.add(currentUserObj.id)
 
     return HttpResponseRedirect(reverse(dashboard, args=[authorObj.id]))
+
+
+# class LoginView()

@@ -11,9 +11,10 @@
 
     <!--Навигационная панель | Nav bar-->
 <div class="container" style="padding-bottom: 30px;">
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-black border-bottom border-body">
   <div class="container-md">
     <a class="navbar-brand" href="{% url 'post_list'%}">Все записи</a>
+    <a class="navbar-brand" href="#">Поиск</a>
     <a href="{% url 'post_new' %}" class="navbar-brand">Создать запись</a>
     {% if request.user.is_authenticated %}
     <div class="dropdown">
@@ -26,7 +27,7 @@
     {% endif %}
     <span class="user">
         {% if request.user.is_authenticated %}
-            Hello {{ request.user.username }},
+            Привет, <em>{{ request.user.username }}</em> |
             <a class="navbar-brand" href="{% url 'logout' %}">Выйти</a>
         {% else %}
             <a class="navbar-brand" href="{% url 'login' %}">Войти</a>

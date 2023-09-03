@@ -3,7 +3,7 @@
 
 {% block content %}
 <!--ВЫВОД СТАТЕЙ | ALL POSTS-->
-<head><title>{{post.title}}</title></head>
+<head><title>Пост - {{post.title}}</title></head>
   <h2>{{post.title}}</h2>
   <p>Автор: <a href="{%url 'blogers' post.author.id %}">{{post.author}}</a></p>
   <p>Текст: {{post.body|linebreaks}}</p>
