@@ -26,12 +26,13 @@
         <p class="text-muted"> {{ usernick.followers.count }} </p>
       </div>
       {% if user.is_authenticated %}
-        {% if user in usernick.following.all %}
+        {% if request.user.id != usernick.id %}
+          {% if user in usernick.following.all%}
             <a href="{% url 'followToggle' usernick.id  %}" class="btn btn-secondary">Отписаться</a>
           {% else %}
             <a  href="{% url 'followToggle' usernick.id  %}" class="btn btn-danger"> Подписаться </a>
+          {% endif %}
         {% endif %}
-          <button class="btn btn-outline-primary">Чат</button>
       {% else %}
         <p class="text-muted"> Войдите, чтобы подписаться </p>
       {% endif %}

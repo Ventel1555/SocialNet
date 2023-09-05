@@ -25,6 +25,7 @@ def post_list(request):
     return render(request, "post/list.html", {"page_obj": page_obj})
 
 
+# Creating a new post
 @login_required
 def post_new(request):
     if request.method == "POST":
