@@ -5,8 +5,8 @@ from django.views.generic.edit import DeleteView
 from django.contrib.auth.decorators import login_required
 
 from blog.utils import AuthenticatedMixin
-from .models import Post
-from .forms import CommentForm, PostForm
+from blog.models import Post
+from blog.forms import CommentForm, PostForm
 
 
 # List of all posts
