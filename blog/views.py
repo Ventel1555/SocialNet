@@ -1,17 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
-
 from django.core.paginator import Paginator
-
 from django.urls import reverse_lazy
-
 from django.views.generic.edit import DeleteView
-
 from django.contrib.auth.decorators import login_required
 
 from blog.utils import AuthenticatedMixin
-
 from .models import Post
-
 from .forms import CommentForm, PostForm
 
 
